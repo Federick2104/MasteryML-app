@@ -119,7 +119,7 @@ const LoginScreen = () => {
                 {/* Sistemare il logout */}
                 <TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={() => { AsyncStorage.removeItem('@user') }}>
                     <Text style={styles.buttonOutlineText}>Delete Local Storage</Text>
-                    <Text style={styles.buttonOutlineText}>{JSON.stringify(userInfo, null , 2)}</Text>
+                    <Text style={styles.buttonOutlineText}>{JSON.stringify(userInfo, null ,2)}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={handleSignUp} 
