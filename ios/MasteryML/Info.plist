@@ -25,6 +25,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
+          <string>MasteryML</string>
           <string>com.fedeee.masteryML</string>
         </array>
       </dict>

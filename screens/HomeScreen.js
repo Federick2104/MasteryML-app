@@ -3,9 +3,10 @@ import React from 'react'
 import { auth } from '../firebase'
 import { signOut } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/core'
+import { usersInfos } from './LoginScreen'
 
 const HomeScreen = () => {
-
+    const users = usersInfos
     const navigation = useNavigation();
 
     const handleSignOut = () => {
@@ -19,6 +20,8 @@ const HomeScreen = () => {
             console.log(error);
           });
       };
+    
+    
 
 
   return (
@@ -30,8 +33,14 @@ const HomeScreen = () => {
         >
             <Text style={styles.buttonText}>Log out</Text>
         </TouchableOpacity>
-
+        <TouchableOpacity
+            style={styles.button}
+            onPress={() => {navigation.navigate('ChatBot')}}
+        >
+            <Text style={styles.buttonText}>ChatBot</Text>
+        </TouchableOpacity>
     </View>
+    
   )
 }
 
