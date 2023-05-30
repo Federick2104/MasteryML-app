@@ -1,16 +1,15 @@
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { OpenAIApi } from 'openai';
 import axios from 'axios';
-
 
 const openai = new OpenAIApi('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');
 
 const ChatBot = () => {
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
+  const [messages, setMessages] = useState([]);
 
-  const handleSend = async () => {
+  const handleInput = async () => {
     try {
       const gptResponse = await axios.post(
         'https://api.openai.com/v1/engines/text-davinci-003/completions',
@@ -27,79 +26,105 @@ const ChatBot = () => {
           },
         }
       );
-  
-      const responseText = gptResponse.data.choices[0].text.trim();
-      setOutput(responseText);
+
+      const newMessage = {
+        sender: 'You',
+        content: input,
+      };
+
+      const responseMessage = {
+        sender: 'AI',
+        content: gptResponse.data.choices[0].text,
+      };
+
+      setMessages((prevMessages) => [...prevMessages, newMessage, responseMessage]);
     } catch (error) {
-      console.log('Error:', error);
+      console.log(error);
     }
-  
+
     setInput('');
   };
-  
+
+  const renderMessage = ({ item }) => {
+    return (
+      <View style={styles.messageContainer}>
+        <Text style={styles.sender}>{item.sender}</Text>
+        <Text style={styles.message}>{item.content}</Text>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Chat</Text>
-      <View style={styles.chatContainer}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Type your message"
-            onChangeText={setInput}
-            value={input}
-          />
-          <TouchableOpacity onPress={handleSend} style={styles.sendButton}>
-            <Text style={styles.sendButtonText}>Send</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.outputContainer}>
-          <Text style={styles.output}>{output}</Text>
-        </View>
+      <Text style={styles.title}>ChatBot</Text>
+      <FlatList
+        data={messages}
+        renderItem={renderMessage}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={styles.chatContainer}
+      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Type here to chat!"
+          onChangeText={(text) => setInput(text)}
+          value={input}
+        />
+        <TouchableOpacity onPress={handleInput} style={styles.sendButton}>
+          <Text style={styles.sendButtonText}>Send</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+export default ChatBot;
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    chatContainer: {
-        width: '90%',
-        height: '70%',
-        borderWidth: 1,
-        borderRadius: 10,
-        overflow: 'hidden',
-    },
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        backgroundColor: '#f2f2f2',
-    },
-    input: {
-        flex: 1,
-        height: 40,
-        borderWidth: 1,
-        borderRadius: 20,
-        padding: 10,
-        marginRight: 10,
-        backgroundColor: '#fff',
-    },
-    sendButton: {
-        backgroundColor: '#2196f3',
-        padding: 10,
-        borderRadius: 20,
-    },
-
-
-})
-
-export default ChatBot
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  chatContainer: {
+    flexGrow: 1,
+  },
+  messageContainer: {
+    marginBottom: 16,
+  },
+  sender: {
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  message: {
+    fontSize: 16,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    paddingHorizontal: 8,
+  },
+  sendButton: {
+    marginLeft: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: 'blue',
+    borderRadius: 4,
+  },
+  sendButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
