@@ -1,9 +1,10 @@
 //rnfes
-import { ImageBackground ,KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Linking, ImageBackground ,KeyboardAvoidingView, KeyboardAvoidingViewComponent, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/core'
+
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -24,11 +25,11 @@ const LoginScreen = () => {
     
     <KeyboardAvoidingView
         style={styles.container}
-        behavior="padding"
     >
         
         <ImageBackground source={require('../assets/imgs/humanitycrop.png')} style={styles.image}>
         <View style={styles.inputContainer}>
+            <Text style={styles.title}>MasteryML</Text>
             <TextInput
                 placeholder="Email"
                 autoCapitalize='none'
@@ -60,7 +61,26 @@ const LoginScreen = () => {
                     <TouchableOpacity onPress={() => navigation.navigate('SignUp')} >
                         <Text style={{color: 'yellow', fontWeight: 'bold', fontSize: 16}}> Sign Up</Text>
                     </TouchableOpacity>
+                    
+                   
+                    
                 </View>
+        </View>
+        <View style={styles.support}>
+            <View>
+                    <Text style={{color: 'white', textDecorationLine: 'underline',textAlign: 'center'}}
+                            onPress={() => Linking.openURL('https://fede.app')}>
+                            Powered by Fede.app 
+                    </Text>
+            </View>
+            <View>
+                    <Text style={{color: 'white', textDecorationLine: 'underline',textAlign: 'center', fontSize: 20}}
+                            onPress={() => Linking.openURL('https://u24.gov.ua/')}>
+                            Support Ukraine 🇺🇦 
+                    </Text>
+                    <Text style={{color: 'white', textAlign: 'center'}} >Help Provide Humanitarian Aid to Ukraine.</Text>
+            </View>
+          
         </View>
        
         </ImageBackground>
@@ -75,6 +95,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+
         
     },
     image: {
@@ -83,6 +104,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
+        position: 'relative',
+        
     },
     inputContainer: {
         width: '80%',
@@ -125,9 +148,24 @@ const styles = StyleSheet.create({
     },
     viewSignUp: {
         marginTop: 20,
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         alignSelf: 'center',
     },
+    title: {
+        color: 'white',
+        fontSize: 50,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
+    support: {
+        width: '100%',
+        textAlign: 'center',
+        flexDirection: 'column',
+        marginTop: 40,
+    }
+
 })
 

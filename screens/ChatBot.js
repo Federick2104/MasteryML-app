@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'r
 import React, { useState } from 'react';
 import { OpenAIApi } from 'openai';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const openai = new OpenAIApi(process.env.OPENAI_API_KEY);
 
@@ -57,7 +58,7 @@ const ChatBot = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ChatBot</Text>
+      <Text style={styles.title}>Parma ad un modello AI</Text>
       <FlatList
         data={messages}
         renderItem={renderMessage}
@@ -72,7 +73,7 @@ const ChatBot = () => {
           value={input}
         />
         <TouchableOpacity onPress={handleInput} style={styles.sendButton}>
-          <Text style={styles.sendButtonText}>Send</Text>
+        <Icon name="paper-plane-o" size={24} color="white" style={styles.sendButtonIcon} />
         </TouchableOpacity>
       </View>
     </View>
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
+    textAlign: 'center',
   },
   chatContainer: {
     flexGrow: 1,
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    backgroundColor: 'blue',
+    backgroundColor: '#1877f2',
     borderRadius: 4,
   },
   sendButtonText: {

@@ -23,7 +23,6 @@ const SignupScreen = () => {
     
     <KeyboardAvoidingView
         style={styles.container}
-        behavior="padding"
     >
         
         <ImageBackground source={require('../assets/imgs/humanitycrop.png')} style={styles.image}>

@@ -67,8 +67,10 @@ const ChatCommunity = () => {
       onSend={messages => onSend(messages)}
       user={{
         _id: auth?.currentUser?.email,
-        name: auth?.currentUser?.email,
         avatar: 'https://i.pravatar.cc/300',
+        name: auth?.currentUser?.email,
+        
+
       }}
       messagesContainerStyle={{
         backgroundColor: 'white',
