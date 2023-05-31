@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
 import { createContext, useContext } from 'react';
-import { StyleSheet, Text, View , ActivityIndicator} from 'react-native';
+import { StyleSheet, View, Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -9,24 +9,10 @@ import { auth } from './firebase';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import ChatBot from './screens/ChatBot';
-import LaunchScreen from './screens/LaunchScreen';
 import SignupScreen from './screens/SignupScreen';
 import ChatCommunity from './screens/ChatCommunity';
 
 
-// useEffect(() => {
-//   // Simulate a delay for the splash screen
-//   const splashScreenTimeout = setTimeout(() => {
-//     setShowLaunchScreen(false);
-//   }, 2000);
-
-//   // Clean up the timeout when the component unmounts
-//   return () => {
-//     clearTimeout(splashScreenTimeout);
-//   };
-// }, []);
-
-// const [showLaunchScreen, setShowLaunchScreen] = useState(true);
 
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +29,8 @@ const AuthenticatedUserProvider = ({ children }) => {
   }
 
 function ChatStack (){
+
+
   return (
     <Stack.Navigator defaultScreenOptions={HomeScreen}>
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -63,24 +51,27 @@ function AuthStack (){
 function RootNavigator(){
   const {user , setUser } = useContext(AuthenticatedUserContext);
   const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, async (authenticatedUser) => {
       authenticatedUser ? setUser(authenticatedUser) : setUser(null);
-      setLoading(false);
+      setTimeout(() => setLoading(false), 1000); // Pause for 2 seconds
     }
     );
   return () => unsubscribeAuth();
   }, [user]);
   if (loading) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size='large'/>
-      </View>
+      console.log('loading'),
+      <View style={styles.containerImg}>
+        <Image source={require('./assets/imgs/machine-learning.png')} style={styles.image} />
+     </View>
     )
   }
 
   return(
     <NavigationContainer>
+      
       {user ? <ChatStack/> : <AuthStack/>}
     </NavigationContainer>
   )
@@ -88,6 +79,7 @@ function RootNavigator(){
 
 
 export default function App() {
+
   return (
     <AuthenticatedUserProvider>
       <RootNavigator/>
@@ -101,5 +93,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  containerImg: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
   },
 });

@@ -4768,7 +4768,7 @@ expo-pwa@0.0.125:
     commander "2.20.0"
     update-check "1.5.3"
 
-expo-splash-screen@~0.18.2:
+expo-splash-screen@^0.18.2:
   version "0.18.2"
   resolved "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.18.2.tgz"
   integrity sha512-fsiKmyn/lbJtV6Uor6wSvl21fScOidFzmB/HHShQJJOu2TBN/vqMvhPu/r0bF5NVk8Wi64r98hiWY1EEsbW03w==

@@ -3,17 +3,15 @@ import React from 'react'
 import { auth } from '../firebase'
 import { signOut } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/core'
-import { usersInfos } from './LoginScreen'
 
 const HomeScreen = () => {
-    const users = usersInfos
+
     const navigation = useNavigation();
 
     const handleSignOut = () => {
         signOut(auth)
           .then(() => {
             console.log('Utente disconnesso!');
-            navigation.replace('Login');
           })
           .catch((error) => {
             // Gestione l'errore
@@ -38,6 +36,13 @@ const HomeScreen = () => {
             onPress={() => {navigation.navigate('ChatBot')}}
         >
             <Text style={styles.buttonText}>ChatBot</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+            style={styles.button}
+            onPress={() => {navigation.navigate('ChatCommunity')}}
+        >
+            <Text style={styles.buttonText}>Chat Community</Text>
         </TouchableOpacity>
     </View>
     

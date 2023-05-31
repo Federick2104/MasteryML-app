@@ -1,9 +1,10 @@
+
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import { OpenAIApi } from 'openai';
 import axios from 'axios';
 
-const openai = new OpenAIApi('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');
+const openai = new OpenAIApi(process.env.OPENAI_API_KEY);
 
 const ChatBot = () => {
   const [input, setInput] = useState('');
@@ -22,7 +23,7 @@ const ChatBot = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${'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'}`,
+            Authorization: `Bearer ${'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'}`,
           },
         }
       );

@@ -3,11 +3,13 @@ import { ImageBackground ,KeyboardAvoidingView, StyleSheet, Text, TextInput, Tou
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import { useNavigation } from '@react-navigation/core'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const navigation = useNavigation();
 
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password)
