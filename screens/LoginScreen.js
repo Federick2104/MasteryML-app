@@ -2,31 +2,18 @@
 import { ImageBackground ,KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase'
-import { useNavigation } from '@react-navigation/core'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const navigation = useNavigation();
-
-    const handleSignUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            console.log('Registrato con:', user.email);
-            navigation.replace('Home');
-          })
-          .catch((error) => alert(error.message));
-      };
 
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log('Loggato con:', user.email);
-                navigation.replace('Home');
             })
             .catch((error) => alert(error.message));
     };
