@@ -58,7 +58,7 @@ const ChatBot = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Parma ad un modello AI</Text>
+      <Text style={styles.title}>Parla ad un modello AI</Text>
       <FlatList
         data={messages}
         renderItem={renderMessage}
