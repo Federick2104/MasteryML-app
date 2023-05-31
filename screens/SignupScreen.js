@@ -3,9 +3,9 @@ import { ImageBackground ,KeyboardAvoidingView, StyleSheet, Text, TextInput, Tou
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/core'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import {createUserWithEmailAndPassword } from 'firebase/auth'
 
-const LoginScreen = () => {
+const SignupScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -16,21 +16,12 @@ const LoginScreen = () => {
           .then((userCredential) => {
             const user = userCredential.user;
             console.log('Registrato con:', user.email);
-            navigation.replace('Home');
+            navigation.replace('Login');
           })
           .catch((error) => alert(error.message));
       };
 
-    const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log('Loggato con:', user.email);
-                navigation.replace('Home');
-            })
-            .catch((error) => alert(error.message));
-    };
-
+  
   return (
     
     <KeyboardAvoidingView
@@ -61,17 +52,11 @@ const LoginScreen = () => {
 
         <View style={styles.buttonContainer}>
                 <TouchableOpacity 
-                    onPress={handleLogin} 
+                    onPress={handleSignUp} 
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>Login</Text>
+                    <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
-                <View style={styles.viewSignUp} >
-                    <Text style={{color: 'white', fontWeight: '600', fontSize: 14}}>Dont Have an Account?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('SignUp')} >
-                        <Text style={{color: 'yellow', fontWeight: 'bold', fontSize: 16}}> Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
         </View>
        
         </ImageBackground>
@@ -79,7 +64,7 @@ const LoginScreen = () => {
   )
 }
 
-export default LoginScreen
+export default SignupScreen
 
 const styles = StyleSheet.create({
     container: {
