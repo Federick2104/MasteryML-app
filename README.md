@@ -56,8 +56,9 @@ Contributions are welcome! If you would like to contribute to MasteryML, please 
 This project is licensed under the [MIT License](LICENSE).
 
 ## Images
+MasteryML screenshots:
 
-
+https://docs.google.com/presentation/d/1EwnenKQjDqtFK9hsfjxrBfurq5VdrxLXOa4L5uodWg4/edit?usp=sharing
 
 
 
