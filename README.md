@@ -1,29 +1,21 @@
 
 # MasteryML
 
-MasteryML is a machine learning project aimed at helping users improve their skills and achieve mastery in various domains. 
+MasteryML is a machine learning mobile application that focuses on object detection and Deep Learning. It is designed to be a showcase for ML, teaching users about the basics of ML and its opportunities. The app includes a "Learn" section where users can learn about the topic and understand the basics of ML, including the practical example mentioned before (Object Detection). After the "Learn" phase, there will be the "Training" phase, which means testing oneself with interactive quizzes on the previously learned notions and general concepts. The app also includes a "Community" section where logged-in users can exchange opinions on the topic at hand and ask quiz questions related to the chosen topic.
 MasteryML,mobile application in ReactNative, for e-learning about Machine Learning and other AI concept. With some samples too and community live chat
 
 ## Table of Contents
 
 - Introduction
-- Features
 - Usage and Installation
 - Docs
 - Contributing
 - License
+- App screensho
 
 ## Introduction
 
 MasteryML is designed to assist users in their journey towards mastery by utilizing cutting-edge machine learning techniques. Whether you want to become proficient in a programming language, master a musical instrument, or excel in a sport, MasteryML is here to support your progress and provide valuable insights.
-
-## Features
-
-- Personalized Recommendations: MasteryML analyzes your performance, interests, and goals to offer tailored recommendations for specific areas of improvement.
-- Progress Tracking: Keep track of your progress over time, visualize your skill development, and identify areas where you need further practice.
-- Skill Evaluation: MasteryML provides objective evaluations of your skills through performance metrics and comparisons to benchmarks or expert levels.
-- Learning Pathways: Discover curated learning paths that guide you through the most effective sequence of learning materials, exercises, and projects.
-- Community Interaction: Connect with other learners, share your achievements, and seek advice from experts in the domain.
 
 ## Usage and Installation
 
@@ -62,5 +54,10 @@ Contributions are welcome! If you would like to contribute to MasteryML, please 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Images
+
+
+
 
 
